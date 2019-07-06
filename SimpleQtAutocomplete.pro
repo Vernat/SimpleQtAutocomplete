@@ -25,10 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        completer.cpp \
+        fake_dictionary_provider.cpp \
         main.cpp \
+        simple_matcher.cpp \
         widget.cpp
 
 HEADERS += \
+        abstract_completer.h \
+        abstract_dictionary_provider.h \
+        abstract_matcher.h \
+        completer.h \
+        dictionary_item.h \
+        fake_dictionary_provider.h \
+        simple_matcher.h \
         widget.h
 
 FORMS += \
