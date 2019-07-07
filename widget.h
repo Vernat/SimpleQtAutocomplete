@@ -9,6 +9,7 @@ class Widget;
 
 class AbstractCompleter;
 struct DictionaryItem;
+typedef QList<DictionaryItem> Dictionary;
 
 class Widget : public QWidget {
   Q_OBJECT
@@ -19,9 +20,11 @@ public:
 
 private:
   void showSelectedItem(const DictionaryItem &item);
+  void onSubmitClicked();
 
   Ui::Widget *ui;
   AbstractCompleter *completer;
+  std::shared_ptr<const Dictionary> dictionary;
 };
 
 #endif // WIDGET_H
