@@ -9,5 +9,11 @@ void SimpleMatcher::setupDictionary(
 }
 
 QList<DictionaryItem> SimpleMatcher::match(const QString &str) {
-  return QList<DictionaryItem>(); // TODO: finish me
+  QList<DictionaryItem> list;
+  for (const auto &item : *dictionary) {
+    if (item.name.startsWith(str)) {
+      list << item;
+    }
+  }
+  return list;
 }

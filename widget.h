@@ -7,16 +7,21 @@ namespace Ui {
 class Widget;
 }
 
-class Widget : public QWidget
-{
-    Q_OBJECT
+class AbstractCompleter;
+struct DictionaryItem;
+
+class Widget : public QWidget {
+  Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = nullptr);
-    ~Widget();
+  explicit Widget(QWidget *parent = nullptr);
+  ~Widget();
 
 private:
-    Ui::Widget *ui;
+  void showSelectedItem(const DictionaryItem &item);
+
+  Ui::Widget *ui;
+  AbstractCompleter *completer;
 };
 
 #endif // WIDGET_H

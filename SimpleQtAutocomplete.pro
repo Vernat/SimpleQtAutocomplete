@@ -26,6 +26,8 @@ CONFIG += c++11
 
 SOURCES += \
         completer.cpp \
+        completition_window.cpp \
+        dictionary_item_widget.cpp \
         fake_dictionary_provider.cpp \
         main.cpp \
         simple_matcher.cpp \
@@ -36,12 +38,16 @@ HEADERS += \
         abstract_dictionary_provider.h \
         abstract_matcher.h \
         completer.h \
+        completition_window.h \
         dictionary_item.h \
+        dictionary_item_widget.h \
         fake_dictionary_provider.h \
         simple_matcher.h \
         widget.h
 
 FORMS += \
+        completition.ui \
+        dictionary_item_widget.ui \
         widget.ui
 
 # Default rules for deployment.

@@ -7,7 +7,7 @@ FakeDictionaryProvider::FakeDictionaryProvider() {}
 std::shared_ptr<Dictionary> FakeDictionaryProvider::getDictionary() {
   std::shared_ptr<Dictionary> dictionaryPtr(new Dictionary);
   dictionaryPtr->append(
-      DictionaryItem("ermion", "a particle with half-integer spin"));
+      DictionaryItem("fermion", "a particle with half-integer spin"));
   dictionaryPtr->append(DictionaryItem(
       "ferromagnet", "a magnet in which the microscopic magnetic moments "
                      "inside the material all point in the same direction"));
