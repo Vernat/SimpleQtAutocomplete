@@ -7,7 +7,7 @@
 #include <QLineEdit>
 
 const int X_OFFSET = -10;
-const int Y_OFFSET = -5;
+const int Y_OFFSET = -7;
 
 Completer::Completer(
     QLineEdit *controlledEdit, std::shared_ptr<AbstractMatcher> &matcher,
