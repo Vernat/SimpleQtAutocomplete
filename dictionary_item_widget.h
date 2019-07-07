@@ -8,7 +8,7 @@ namespace Ui {
 class DictionaryItemWidget;
 }
 
-const int DICTIONARY_WIDGET_HEIGHT = 40;
+const int DICTIONARY_WIDGET_HEIGHT = 24;
 const int DICTIONARY_WIDGET_WIDTH = 400;
 
 class DictionaryItemWidget : public QWidget {

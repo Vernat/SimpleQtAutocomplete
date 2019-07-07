@@ -8,10 +8,12 @@
 CompletitionWindow::CompletitionWindow(QWidget *parent)
     : QWidget(parent), ui(new Ui::Completition) {
   ui->setupUi(this);
-  QVBoxLayout *layout = new QVBoxLayout;
-  widgetsFrameLayout = new QVBoxLayout;
-  ui->widgetsFrame->setLayout(layout);
-  ui->widgetsFrame->setFixedWidth(DICTIONARY_WIDGET_WIDTH);
+  //  QVBoxLayout *layout = new QVBoxLayout;
+  //  widgetsFrameLayout = new QVBoxLayout;
+  //  widgetsFrameLayout->setContentsMargins(0, 0, 0, 0);
+  //  ui->scrollAreaWidgetContents->setLayout(layout);
+  ui->scrollAreaWidgetContents->setFixedWidth(DICTIONARY_WIDGET_WIDTH);
+  setFixedWidth(DICTIONARY_WIDGET_WIDTH);
 
   setWindowFlags(Qt::Window | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
@@ -31,7 +33,7 @@ void CompletitionWindow::setItems(const QList<DictionaryItem> &items) {
 void CompletitionWindow::createNewWidgets() {
   for (const auto &item : items) {
     auto dictionaryItem = new DictionaryItemWidget(item);
-    ui->widgetsFrame->layout()->addWidget(dictionaryItem);
+    ui->scrollAreaWidgetContents->layout()->addWidget(dictionaryItem);
     dictionaryWidgets.insert(item.name, dictionaryItem);
   }
 }
@@ -47,6 +49,6 @@ void CompletitionWindow::removeOldWidgets() {
 
 void CompletitionWindow::adjustSize() {
   const auto newHeight = items.size() * DICTIONARY_WIDGET_HEIGHT;
-  ui->widgetsFrame->setFixedHeight(newHeight + 10);
+  ui->scrollAreaWidgetContents->setFixedHeight(newHeight);
   setFixedHeight(newHeight);
 }
