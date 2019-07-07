@@ -26,6 +26,11 @@ void DictionaryItemWidget::leaveEvent(QEvent *event) {
   return QWidget::leaveEvent(event);
 }
 
+void DictionaryItemWidget::mouseReleaseEvent(QMouseEvent *event) {
+  emit selected(item);
+  return QWidget::mouseReleaseEvent(event);
+}
+
 void DictionaryItemWidget::changeTextColor(const Qt::GlobalColor color) {
   QPalette p(palette());
   p.setColor(QPalette::WindowText, color);

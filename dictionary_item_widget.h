@@ -17,13 +17,17 @@ class DictionaryItemWidget : public QWidget {
 public:
   explicit DictionaryItemWidget(const DictionaryItem &item,
                                 QWidget *parent = nullptr);
-  ~DictionaryItemWidget();
+  ~DictionaryItemWidget() override;
 
   QString name() const;
 
+signals:
+  void selected(const DictionaryItem &item);
+
 protected:
-  void enterEvent(QEvent *event);
-  void leaveEvent(QEvent *event);
+  void enterEvent(QEvent *event) override;
+  void leaveEvent(QEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
   void changeTextColor(const Qt::GlobalColor color);

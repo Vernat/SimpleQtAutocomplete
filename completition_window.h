@@ -21,6 +21,9 @@ public:
 
   void setItems(const QList<DictionaryItem> &items);
 
+signals:
+  void selected(const DictionaryItem &item);
+
 private:
   void createNewWidgets();
   void removeOldWidgets();

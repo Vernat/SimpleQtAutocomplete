@@ -28,9 +28,11 @@ void CompletitionWindow::setItems(const QList<DictionaryItem> &items) {
 
 void CompletitionWindow::createNewWidgets() {
   for (const auto &item : items) {
-    auto dictionaryItem = new DictionaryItemWidget(item);
-    ui->scrollAreaWidgetContents->layout()->addWidget(dictionaryItem);
-    dictionaryWidgets.insert(item.name, dictionaryItem);
+    auto dictionaryItemWidget = new DictionaryItemWidget(item);
+    connect(dictionaryItemWidget, &DictionaryItemWidget::selected, this,
+            &CompletitionWindow::selected);
+    ui->scrollAreaWidgetContents->layout()->addWidget(dictionaryItemWidget);
+    dictionaryWidgets.insert(item.name, dictionaryItemWidget);
   }
 }
 

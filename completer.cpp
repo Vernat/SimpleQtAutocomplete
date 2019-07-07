@@ -18,24 +18,31 @@ Completer::Completer(
   dictionary = dictionaryProvider->getDictionary();
   matcher->setupDictionary(dictionary);
 
+  completitionWindow = new CompletitionWindow();
+
   connect(controlledEdit, &QLineEdit::textChanged, this,
           &Completer::onTextChanged);
 
-  completition = new CompletitionWindow();
+  connect(completitionWindow, &CompletitionWindow::selected, this,
+          &Completer::onItemSelected);
 }
 
 void Completer::onTextChanged(const QString &newText) {
   const int cursorPos = controlledEdit->cursorPosition();
-  qDebug() << "newText=" << newText << "  cursorPos= " << cursorPos;
 
   if (newText.size() > 0 && cursorPos == newText.size()) {
     const auto matchedItems = matcher->match(newText);
-    completition->setItems(matchedItems);
-    completition->move(getCursorPosition(newText));
-    completition->show();
+    completitionWindow->setItems(matchedItems);
+    completitionWindow->move(getCursorPosition(newText));
+    completitionWindow->show();
   } else {
-    completition->hide();
+    completitionWindow->hide();
   }
+}
+
+void Completer::onItemSelected(const DictionaryItem &item) {
+  controlledEdit->setText(item.name);
+  completitionWindow->hide();
 }
 
 QPoint Completer::getCursorPosition(const QString &text) const {
