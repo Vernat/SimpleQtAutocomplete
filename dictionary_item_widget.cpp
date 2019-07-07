@@ -1,5 +1,6 @@
 #include "dictionary_item_widget.h"
 #include "ui_dictionary_item_widget.h"
+#include <QPalette>
 
 DictionaryItemWidget::DictionaryItemWidget(const DictionaryItem &item,
                                            QWidget *parent)
@@ -14,3 +15,19 @@ DictionaryItemWidget::DictionaryItemWidget(const DictionaryItem &item,
 DictionaryItemWidget::~DictionaryItemWidget() { delete ui; }
 
 QString DictionaryItemWidget::name() const { return item.name; }
+
+void DictionaryItemWidget::enterEvent(QEvent *event) {
+  changeTextColor(Qt::lightGray);
+  return QWidget::enterEvent(event);
+}
+
+void DictionaryItemWidget::leaveEvent(QEvent *event) {
+  changeTextColor(Qt::black);
+  return QWidget::leaveEvent(event);
+}
+
+void DictionaryItemWidget::changeTextColor(const Qt::GlobalColor color) {
+  QPalette p(palette());
+  p.setColor(QPalette::WindowText, color);
+  setPalette(p);
+}

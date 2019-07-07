@@ -21,7 +21,13 @@ public:
 
   QString name() const;
 
+protected:
+  void enterEvent(QEvent *event);
+  void leaveEvent(QEvent *event);
+
 private:
+  void changeTextColor(const Qt::GlobalColor color);
+
   Ui::DictionaryItemWidget *ui;
   DictionaryItem item;
 };
