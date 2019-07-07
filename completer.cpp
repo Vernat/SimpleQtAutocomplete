@@ -19,7 +19,6 @@ Completer::Completer(
           &Completer::onTextChanged);
 
   completition = new CompletitionWindow();
-  //  completition->show();
 }
 
 void Completer::onTextChanged(const QString &newText) {

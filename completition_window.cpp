@@ -8,10 +8,6 @@
 CompletitionWindow::CompletitionWindow(QWidget *parent)
     : QWidget(parent), ui(new Ui::Completition) {
   ui->setupUi(this);
-  //  QVBoxLayout *layout = new QVBoxLayout;
-  //  widgetsFrameLayout = new QVBoxLayout;
-  //  widgetsFrameLayout->setContentsMargins(0, 0, 0, 0);
-  //  ui->scrollAreaWidgetContents->setLayout(layout);
   ui->scrollAreaWidgetContents->setFixedWidth(DICTIONARY_WIDGET_WIDTH);
   setFixedWidth(DICTIONARY_WIDGET_WIDTH);
 
