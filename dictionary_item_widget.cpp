@@ -3,7 +3,7 @@
 #include <QFontMetrics>
 #include <QPalette>
 
-const int TEXT_ELIDING_OFFSET = 30;
+const int TEXT_ELIDING_OFFSET = 20;
 
 DictionaryItemWidget::DictionaryItemWidget(const QString &inputText,
                                            const DictionaryItem &item,
