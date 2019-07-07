@@ -22,6 +22,7 @@ public:
 
 private:
   void onTextChanged(const QString &newText);
+  QPoint getCursorPosition(const QString &text) const;
 
   QLineEdit *controlledEdit;
   std::shared_ptr<AbstractMatcher> matcher;

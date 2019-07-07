@@ -6,6 +6,9 @@
 #include <QDebug>
 #include <QLineEdit>
 
+const int X_OFFSET = -10;
+const int Y_OFFSET = -5;
+
 Completer::Completer(
     QLineEdit *controlledEdit, std::shared_ptr<AbstractMatcher> &matcher,
     std::shared_ptr<AbstractDictionaryProvider> &dictionaryProvider,
@@ -28,8 +31,14 @@ void Completer::onTextChanged(const QString &newText) {
   if (newText.size() > 0 && cursorPos == newText.size()) {
     const auto matchedItems = matcher->match(newText);
     completition->setItems(matchedItems);
+    completition->move(getCursorPosition(newText));
     completition->show();
   } else {
     completition->hide();
   }
+}
+
+QPoint Completer::getCursorPosition(const QString &text) const {
+  return controlledEdit->mapToGlobal(
+      QPoint(X_OFFSET, controlledEdit->geometry().bottom() + Y_OFFSET));
 }
