@@ -28,6 +28,7 @@ private:
   void createNewWidgets();
   void removeOldWidgets();
   void adjustSize();
+  void onApplicationStateChanged(Qt::ApplicationState state);
 
   Ui::Completition *ui;
   QList<DictionaryItem> items;

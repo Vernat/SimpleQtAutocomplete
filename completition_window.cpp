@@ -3,6 +3,7 @@
 #include "dictionary_item_widget.h"
 #include "ui_completition.h"
 #include <QDebug>
+#include <QFlags>
 #include <QListWidgetItem>
 
 CompletitionWindow::CompletitionWindow(QWidget *parent)
@@ -14,6 +15,10 @@ CompletitionWindow::CompletitionWindow(QWidget *parent)
   setWindowFlags(Qt::Window | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
   setAttribute(Qt::WA_ShowWithoutActivating, true);
+  QGuiApplication *application =
+      static_cast<QGuiApplication *>(QApplication::instance());
+  connect(application, &QGuiApplication::applicationStateChanged, this,
+          &CompletitionWindow::onApplicationStateChanged);
 }
 
 CompletitionWindow::~CompletitionWindow() { delete ui; }
@@ -49,4 +54,11 @@ void CompletitionWindow::adjustSize() {
   const auto newHeight = items.size() * DICTIONARY_WIDGET_HEIGHT;
   ui->scrollAreaWidgetContents->setFixedHeight(newHeight);
   setFixedHeight(newHeight);
+}
+
+void CompletitionWindow::onApplicationStateChanged(Qt::ApplicationState state) {
+  if (isVisible())
+    setVisible(!(Qt::ApplicationInactive == state ||
+                 Qt::ApplicationHidden == state ||
+                 Qt::ApplicationSuspended == state));
 }
