@@ -15,25 +15,28 @@ CompletitionWindow::CompletitionWindow(QWidget *parent)
   setWindowFlags(Qt::Window | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
   setAttribute(Qt::WA_ShowWithoutActivating, true);
+
   QGuiApplication *application =
       static_cast<QGuiApplication *>(QApplication::instance());
+
   connect(application, &QGuiApplication::applicationStateChanged, this,
           &CompletitionWindow::onApplicationStateChanged);
 }
 
 CompletitionWindow::~CompletitionWindow() { delete ui; }
 
-void CompletitionWindow::setItems(const QList<DictionaryItem> &items) {
+void CompletitionWindow::setItems(const QList<DictionaryItem> &items,
+                                  const QString &inputText) {
 
   this->items = items;
   removeOldWidgets();
-  createNewWidgets();
+  createNewWidgets(inputText);
   adjustSize();
 }
 
-void CompletitionWindow::createNewWidgets() {
+void CompletitionWindow::createNewWidgets(const QString &inputText) {
   for (const auto &item : items) {
-    auto dictionaryItemWidget = new DictionaryItemWidget(item);
+    auto dictionaryItemWidget = new DictionaryItemWidget(inputText, item);
     connect(dictionaryItemWidget, &DictionaryItemWidget::selected, this,
             &CompletitionWindow::selected);
     ui->scrollAreaWidgetContents->layout()->addWidget(dictionaryItemWidget);
@@ -57,8 +60,9 @@ void CompletitionWindow::adjustSize() {
 }
 
 void CompletitionWindow::onApplicationStateChanged(Qt::ApplicationState state) {
-  if (isVisible())
+  if (isVisible()) {
     setVisible(!(Qt::ApplicationInactive == state ||
                  Qt::ApplicationHidden == state ||
                  Qt::ApplicationSuspended == state));
+  }
 }

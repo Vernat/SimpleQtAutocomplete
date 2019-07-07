@@ -19,13 +19,13 @@ public:
   explicit CompletitionWindow(QWidget *parent = nullptr);
   ~CompletitionWindow();
 
-  void setItems(const QList<DictionaryItem> &items);
+  void setItems(const QList<DictionaryItem> &items, const QString &inputText);
 
 signals:
   void selected(const DictionaryItem &item);
 
 private:
-  void createNewWidgets();
+  void createNewWidgets(const QString &inputText);
   void removeOldWidgets();
   void adjustSize();
   void onApplicationStateChanged(Qt::ApplicationState state);

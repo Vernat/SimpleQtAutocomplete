@@ -15,7 +15,8 @@ class DictionaryItemWidget : public QWidget {
   Q_OBJECT
 
 public:
-  explicit DictionaryItemWidget(const DictionaryItem &item,
+  explicit DictionaryItemWidget(const QString &inputText,
+                                const DictionaryItem &item,
                                 QWidget *parent = nullptr);
   ~DictionaryItemWidget() override;
 

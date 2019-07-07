@@ -23,7 +23,7 @@ public:
 private:
   void onTextChanged(const QString &newText);
   void onItemSelected(const DictionaryItem &item);
-  QPoint getCursorPosition(const QString &text) const;
+  QPoint getCursorPosition() const;
 
   QLineEdit *controlledEdit;
   std::shared_ptr<AbstractMatcher> matcher;

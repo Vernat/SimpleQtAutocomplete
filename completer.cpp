@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QLineEdit>
 
-const int X_OFFSET = -10;
+const int X_OFFSET = -2;
 const int Y_OFFSET = -7;
 
 Completer::Completer(
@@ -32,8 +32,8 @@ void Completer::onTextChanged(const QString &newText) {
 
   if (newText.size() > 0 && cursorPos == newText.size()) {
     const auto matchedItems = matcher->match(newText);
-    completitionWindow->setItems(matchedItems);
-    completitionWindow->move(getCursorPosition(newText));
+    completitionWindow->setItems(matchedItems, newText);
+    completitionWindow->move(getCursorPosition());
     completitionWindow->show();
   } else {
     completitionWindow->hide();
@@ -45,7 +45,7 @@ void Completer::onItemSelected(const DictionaryItem &item) {
   completitionWindow->hide();
 }
 
-QPoint Completer::getCursorPosition(const QString &text) const {
+QPoint Completer::getCursorPosition() const {
   return controlledEdit->mapToGlobal(
       QPoint(X_OFFSET, controlledEdit->geometry().bottom() + Y_OFFSET));
 }

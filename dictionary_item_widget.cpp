@@ -3,18 +3,22 @@
 #include <QFontMetrics>
 #include <QPalette>
 
-const int TEXT_ELIDING_OFFSET = 32;
+const int TEXT_ELIDING_OFFSET = 30;
 
-DictionaryItemWidget::DictionaryItemWidget(const DictionaryItem &item,
+DictionaryItemWidget::DictionaryItemWidget(const QString &inputText,
+                                           const DictionaryItem &item,
                                            QWidget *parent)
     : QWidget(parent), ui(new Ui::DictionaryItemWidget), item(item) {
   ui->setupUi(this);
-  ui->name->setText(item.name);
-  QFontMetrics nameFontMetrics(ui->name->font());
+  ui->prefix->setText(inputText);
+  const auto suffixText = item.name.mid(inputText.size());
+  ui->suffix->setText(suffixText);
+  QFontMetrics prefixFontMetrics(ui->prefix->font());
+  QFontMetrics nameFontMetrics(ui->suffix->font());
   QFontMetrics descriptionFontMetrics(ui->description->font());
-  const auto descriptionLength = width() -
-                                 nameFontMetrics.horizontalAdvance(item.name) -
-                                 TEXT_ELIDING_OFFSET;
+  const auto descriptionLength =
+      width() - prefixFontMetrics.horizontalAdvance(inputText) -
+      nameFontMetrics.horizontalAdvance(suffixText) - TEXT_ELIDING_OFFSET;
   ui->description->setText(descriptionFontMetrics.elidedText(
       item.description, Qt::ElideRight, descriptionLength));
   setFixedHeight(DICTIONARY_WIDGET_HEIGHT);
