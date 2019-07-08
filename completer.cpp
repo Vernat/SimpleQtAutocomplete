@@ -10,15 +10,15 @@ const int X_OFFSET = -2;
 const int Y_OFFSET = -7;
 
 Completer::Completer(
-    QLineEdit *controlledEdit, std::shared_ptr<AbstractMatcher> &matcher,
+    AbstractCompletionWindow *window, QLineEdit *controlledEdit,
+    std::shared_ptr<AbstractMatcher> &matcher,
     std::shared_ptr<AbstractDictionaryProvider> &dictionaryProvider,
     QObject *parent)
-    : AbstractCompleter(parent), controlledEdit(controlledEdit),
-      matcher(matcher), dictionaryProvider(dictionaryProvider) {
+    : AbstractCompleter(parent), completitionWindow(window),
+      controlledEdit(controlledEdit), matcher(matcher),
+      dictionaryProvider(dictionaryProvider) {
   dictionary = dictionaryProvider->getDictionary();
   matcher->setupDictionary(dictionary);
-
-  completitionWindow = new CompletitionWindow();
 
   connect(controlledEdit, &QLineEdit::textChanged, this,
           &Completer::onTextChanged);

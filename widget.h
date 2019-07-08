@@ -7,6 +7,7 @@ namespace Ui {
 class Widget;
 }
 
+class AbstractCompletionWindow;
 class AbstractCompleter;
 struct DictionaryItem;
 typedef QList<DictionaryItem> Dictionary;
@@ -23,6 +24,7 @@ private:
   void onSubmitClicked();
 
   Ui::Widget *ui;
+  AbstractCompletionWindow *completitionWindow;
   AbstractCompleter *completer;
   std::shared_ptr<const Dictionary> dictionary;
 };

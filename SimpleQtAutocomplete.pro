@@ -35,6 +35,7 @@ SOURCES += \
 
 HEADERS += \
         abstract_completer.h \
+        abstract_completion_window.h \
         abstract_dictionary_provider.h \
         abstract_matcher.h \
         completer.h \

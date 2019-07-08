@@ -8,7 +8,7 @@ class AbstractDictionaryProvider;
 class AbstractMatcher;
 typedef QList<DictionaryItem> Dictionary;
 class QLineEdit;
-class CompletitionWindow;
+class AbstractCompletionWindow;
 
 typedef QPair<QString, QString> pair;
 
@@ -16,7 +16,8 @@ class Completer : public AbstractCompleter {
   Q_OBJECT
 public:
   explicit Completer(
-      QLineEdit *controlledEdit, std::shared_ptr<AbstractMatcher> &matcher,
+      AbstractCompletionWindow *window, QLineEdit *controlledEdit,
+      std::shared_ptr<AbstractMatcher> &matcher,
       std::shared_ptr<AbstractDictionaryProvider> &dictionaryProvider,
       QObject *parent = nullptr);
 
@@ -25,11 +26,11 @@ private:
   void onItemSelected(const DictionaryItem &item);
   QPoint getCursorPosition() const;
 
+  AbstractCompletionWindow *completitionWindow;
   QLineEdit *controlledEdit;
   std::shared_ptr<AbstractMatcher> matcher;
   std::shared_ptr<AbstractDictionaryProvider> dictionaryProvider;
   std::shared_ptr<const Dictionary> dictionary;
-  CompletitionWindow *completitionWindow;
 };
 
 #endif // COMPLETER_H

@@ -7,7 +7,7 @@
 #include <QListWidgetItem>
 
 CompletitionWindow::CompletitionWindow(QWidget *parent)
-    : QWidget(parent), ui(new Ui::Completition) {
+    : AbstractCompletionWindow(parent), ui(new Ui::Completition) {
   ui->setupUi(this);
   ui->scrollAreaWidgetContents->setFixedWidth(DICTIONARY_WIDGET_WIDTH);
   setFixedWidth(DICTIONARY_WIDGET_WIDTH);

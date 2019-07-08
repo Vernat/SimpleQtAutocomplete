@@ -1,8 +1,8 @@
 #ifndef COMPLETITION_H
 #define COMPLETITION_H
 
+#include "abstract_completion_window.h"
 #include <QMap>
-#include <QWidget>
 
 namespace Ui {
 class Completition;
@@ -12,17 +12,15 @@ struct DictionaryItem;
 class DictionaryItemWidget;
 class QVBoxLayout;
 
-class CompletitionWindow : public QWidget {
+class CompletitionWindow : public AbstractCompletionWindow {
   Q_OBJECT
 
 public:
   explicit CompletitionWindow(QWidget *parent = nullptr);
-  ~CompletitionWindow();
+  ~CompletitionWindow() override;
 
-  void setItems(const QList<DictionaryItem> &items, const QString &inputText);
-
-signals:
-  void selected(const DictionaryItem &item);
+  void setItems(const QList<DictionaryItem> &items,
+                const QString &inputText) override;
 
 private:
   void createNewWidgets(const QString &inputText);
