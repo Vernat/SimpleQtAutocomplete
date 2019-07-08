@@ -8,6 +8,9 @@ public:
   FakeDictionaryProvider();
 
   std::shared_ptr<Dictionary> getDictionary() override;
+
+private:
+  std::shared_ptr<Dictionary> dictionary;
 };
 
 #endif // FAKE_DICTIONARY_PROVIDER_H

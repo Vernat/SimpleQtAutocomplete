@@ -2,38 +2,38 @@
 #include "dictionary_item.h"
 #include <QList>
 
-FakeDictionaryProvider::FakeDictionaryProvider() {}
-
-std::shared_ptr<Dictionary> FakeDictionaryProvider::getDictionary() {
-  std::shared_ptr<Dictionary> dictionaryPtr(new Dictionary);
-  dictionaryPtr->append(
+FakeDictionaryProvider::FakeDictionaryProvider() {
+  dictionary = std::shared_ptr<Dictionary>(new Dictionary);
+  dictionary->append(
       DictionaryItem("fermion", "a particle with half-integer spin"));
-  dictionaryPtr->append(DictionaryItem(
+  dictionary->append(DictionaryItem(
       "ferromagnet", "a magnet in which the microscopic magnetic moments "
                      "inside the material all point in the same direction"));
-  dictionaryPtr->append(
+  dictionary->append(
       DictionaryItem("field", "a mathematical function that has a value (or "
                               "set of values) at all points in space"));
-  dictionaryPtr->append(DictionaryItem(
+  dictionary->append(DictionaryItem(
       "flavor",
       "a set of quantum numbers that uniquely identify the type of particle"));
-  dictionaryPtr->append(DictionaryItem(
-      "rustrated", "a physical system with no well-defined ground state"));
-  dictionaryPtr->append(DictionaryItem(
+  dictionary->append(DictionaryItem(
+      "frustrated", "a physical system with no well-defined ground state"));
+  dictionary->append(DictionaryItem(
       "gluons",
       "particles in the Standard Model that mediate strong interactions"));
-  dictionaryPtr->append(
+  dictionary->append(
       DictionaryItem("gravitino", "the superpartner of the graviton"));
-  dictionaryPtr->append(DictionaryItem(
+  dictionary->append(DictionaryItem(
       "graviton", "postulated force carrier of the gravitational force"));
-  dictionaryPtr->append(
+  dictionary->append(
       DictionaryItem("hadron", "Standard Model particle made of quarks"));
-  dictionaryPtr->append(DictionaryItem(
+  dictionary->append(DictionaryItem(
       "inflation", "period of exponential expansion thought to have occurred "
                    "around 10-36 seconds after the universe began"));
-  dictionaryPtr->append(DictionaryItem(
+  dictionary->append(DictionaryItem(
       "kaon", "any one of four mesons with nonzero strangeness"));
-  dictionaryPtr->append(DictionaryItem("linac", "linear accelerator"));
+  dictionary->append(DictionaryItem("linac", "linear accelerator"));
+}
 
-  return dictionaryPtr;
+std::shared_ptr<Dictionary> FakeDictionaryProvider::getDictionary() {
+  return dictionary;
 }
