@@ -1,4 +1,4 @@
-#include "completition_window.h"
+#include "completion_window.h"
 #include "dictionary_item.h"
 #include "dictionary_item_widget.h"
 #include "ui_completition.h"
@@ -6,7 +6,7 @@
 #include <QFlags>
 #include <QListWidgetItem>
 
-CompletitionWindow::CompletitionWindow(QWidget *parent)
+CompletionWindow::CompletionWindow(QWidget *parent)
     : AbstractCompletionWindow(parent), ui(new Ui::Completition) {
   ui->setupUi(this);
   ui->scrollAreaWidgetContents->setFixedWidth(DICTIONARY_WIDGET_WIDTH);
@@ -20,13 +20,13 @@ CompletitionWindow::CompletitionWindow(QWidget *parent)
       static_cast<QGuiApplication *>(QApplication::instance());
 
   connect(application, &QGuiApplication::applicationStateChanged, this,
-          &CompletitionWindow::onApplicationStateChanged);
+          &CompletionWindow::onApplicationStateChanged);
 }
 
-CompletitionWindow::~CompletitionWindow() { delete ui; }
+CompletionWindow::~CompletionWindow() { delete ui; }
 
-void CompletitionWindow::setItems(const QList<DictionaryItem> &items,
-                                  const QString &inputText) {
+void CompletionWindow::setItems(const QList<DictionaryItem> &items,
+                                const QString &inputText) {
 
   this->items = items;
   removeOldWidgets();
@@ -34,17 +34,17 @@ void CompletitionWindow::setItems(const QList<DictionaryItem> &items,
   adjustSize();
 }
 
-void CompletitionWindow::createNewWidgets(const QString &inputText) {
+void CompletionWindow::createNewWidgets(const QString &inputText) {
   for (const auto &item : items) {
     auto dictionaryItemWidget = new DictionaryItemWidget(inputText, item);
     connect(dictionaryItemWidget, &DictionaryItemWidget::selected, this,
-            &CompletitionWindow::selected);
+            &CompletionWindow::selected);
     ui->scrollAreaWidgetContents->layout()->addWidget(dictionaryItemWidget);
     dictionaryWidgets.insert(item.name, dictionaryItemWidget);
   }
 }
 
-void CompletitionWindow::removeOldWidgets() {
+void CompletionWindow::removeOldWidgets() {
   auto it = dictionaryWidgets.begin();
   while (it != dictionaryWidgets.end()) {
     it.value()->deleteLater();
@@ -53,13 +53,13 @@ void CompletitionWindow::removeOldWidgets() {
   dictionaryWidgets.clear();
 }
 
-void CompletitionWindow::adjustSize() {
+void CompletionWindow::adjustSize() {
   const auto newHeight = items.size() * DICTIONARY_WIDGET_HEIGHT;
   ui->scrollAreaWidgetContents->setFixedHeight(newHeight);
   setFixedHeight(newHeight);
 }
 
-void CompletitionWindow::onApplicationStateChanged(Qt::ApplicationState state) {
+void CompletionWindow::onApplicationStateChanged(Qt::ApplicationState state) {
   if (isVisible()) {
     setVisible(!(Qt::ApplicationInactive == state ||
                  Qt::ApplicationHidden == state ||

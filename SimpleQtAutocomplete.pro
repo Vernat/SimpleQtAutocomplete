@@ -26,7 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         completer.cpp \
-        completition_window.cpp \
+        completion_window.cpp \
         dictionary_item_widget.cpp \
         fake_dictionary_provider.cpp \
         main.cpp \
@@ -39,7 +39,7 @@ HEADERS += \
         abstract_dictionary_provider.h \
         abstract_matcher.h \
         completer.h \
-        completition_window.h \
+        completion_window.h \
         dictionary_item.h \
         dictionary_item_widget.h \
         fake_dictionary_provider.h \

@@ -1,13 +1,13 @@
 #include "widget.h"
 #include "completer.h"
-#include "completition_window.h"
+#include "completion_window.h"
 #include "fake_dictionary_provider.h"
 #include "simple_matcher.h"
 #include "ui_widget.h"
 
 Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
   ui->setupUi(this);
-  completitionWindow = new CompletitionWindow();
+  completitionWindow = new CompletionWindow();
   std::shared_ptr<AbstractMatcher> matcher = std::make_shared<SimpleMatcher>();
   std::shared_ptr<AbstractDictionaryProvider> dictionaryProvider =
       std::make_shared<FakeDictionaryProvider>();

@@ -1,6 +1,6 @@
 #include "completer.h"
 #include "abstract_dictionary_provider.h"
-#include "completition_window.h"
+#include "completion_window.h"
 #include "dictionary_item.h"
 #include "simple_matcher.h"
 #include <QDebug>
@@ -23,7 +23,7 @@ Completer::Completer(
   connect(controlledEdit, &QLineEdit::textChanged, this,
           &Completer::onTextChanged);
 
-  connect(completitionWindow, &CompletitionWindow::selected, this,
+  connect(completitionWindow, &CompletionWindow::selected, this,
           &Completer::onItemSelected);
 }
 

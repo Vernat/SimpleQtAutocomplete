@@ -12,12 +12,12 @@ struct DictionaryItem;
 class DictionaryItemWidget;
 class QVBoxLayout;
 
-class CompletitionWindow : public AbstractCompletionWindow {
+class CompletionWindow : public AbstractCompletionWindow {
   Q_OBJECT
 
 public:
-  explicit CompletitionWindow(QWidget *parent = nullptr);
-  ~CompletitionWindow() override;
+  explicit CompletionWindow(QWidget *parent = nullptr);
+  ~CompletionWindow() override;
 
   void setItems(const QList<DictionaryItem> &items,
                 const QString &inputText) override;
